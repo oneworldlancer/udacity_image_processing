@@ -1,0 +1,13 @@
+{
+    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true,
+    "typescript.format.insertSpaceAfterTypeAssertion": true,
+    "html.format.endWithNewline": true,
+    "html.format.indentHandlebars": true,
+    "html.format.indentInnerHtml": true,
+    "html.format.maxPreserveNewLines": 3,
+    "html.format.wrapAttributesIndentSize": 3,
+    "css.format.spaceAroundSelectorSeparator": true,
+    "prettier.insertPragma": true,
+    "prettier.requireConfig": true,
+    "prettier.requirePragma": true
+}
