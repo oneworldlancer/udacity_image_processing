@@ -13,5 +13,5 @@ http://localhost:3000/api/img/new
 http://localhost:3000/api/img/get?filename=me&width=300&height=300
 
 
-4- api - Image List ffrom Full Directory, select to view with default size
+4- api - Image List from Full Directory, select to view with default size
 http://localhost:3000/api/img/pick
