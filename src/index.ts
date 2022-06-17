@@ -1,6 +1,5 @@
 import express from "express";
 import path from "path";
-
 import { iDebugManager as dbgManager } from "./iUtility/iDebugManager";
 import route_image_get from "./iRoutes/api/image/api_Image_Get";
 import route_image_new from "./iRoutes/api/image/api_Image_New";
@@ -8,7 +7,7 @@ import route_image_pick from "./iRoutes/api/image/api_Image_Pick";
 
 // #region "iParams"
 
-const app = express();
+const app: express.Application = express();
 
 const port = 3000;
 
@@ -57,42 +56,30 @@ app.use(
 // #region "iApis"
 
 //* HOME Page */
-app.get("/", (req, res) => {
+app.get("/", (req: express.Request, res: express.Response) => {
   try {
     /*  res.status(200).send("Hello, world!" + __dirname); */
     res
       .status(200)
       .sendFile(path.join(__dirname + "/public/iWeb/img/index.html"));
-  } catch (error) {
+  } catch (error: string | Error | unknown | null) {
     dbgManager.iDebug_Message(error);
   }
-
-  //console.log("__dirname == " + __dirname);
-  //res.send("Hello, world!"  + __dirname);
-  //res.send("<html> <head>server Response</head><body><h1> This page was render direcly from the server <p>Hello there welcome to my website</p></h1></body></html>");
-  ///// res.sendFile(__dirname + "/iWeb/index.html");
-  // res.sendFile(__dirname + "/public/iWeb/index.html");
 });
 
 /* Image APIs */
 
-app.get("/api", (req, res) => {
+app.get("/api", (req: express.Request, res: express.Response) => {
   try {
     res
       .status(200)
       .sendFile(path.join(__dirname + "/public/iWeb/img/index.html"));
-  } catch (error) {
+  } catch (error: string | Error | unknown | null) {
     dbgManager.iDebug_Message(error);
   }
 
   // res.send("api- Hello, world!");
 });
-
-// serve your css as static
-
-/* app.get("/api", (req, res) => {
-    res.send("api- Hello, world!");
-}); */
 
 // #endregion
 
@@ -105,10 +92,6 @@ try {
 } catch (error) {
   dbgManager.iDebug_Message(error);
 }
-
-// #endregion
-
-// #region ""
 
 // #endregion
 

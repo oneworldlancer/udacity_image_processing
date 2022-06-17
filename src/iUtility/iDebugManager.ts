@@ -5,11 +5,20 @@ export class iDebugManager {
   }
 
   /* iDebug_Message */
-  static iDebug_Message(strMessage: string | unknown) {
+  static iDebug_Message(strMessage: string | unknown): boolean {
     try {
       console.log("MSG:::  " + strMessage);
-    } catch (error) {
+
+      if (strMessage === null) {
+        return true;
+      } else if (strMessage === "") {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error: string | Error | unknown | null) {
       console.log(error);
+      return false;
     }
   }
 }

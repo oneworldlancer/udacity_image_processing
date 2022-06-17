@@ -1,23 +1,26 @@
-import express from "express";
-
+import express, { Router } from "express";
 import path from "path";
 import { iDebugManager as dbgManager } from "../../../iUtility/iDebugManager";
 import { iImageManager as imgManager } from "../../../iManager/ImageManager/iImageManager";
 
 // #region "Params"
 
-const route_image_pick = express.Router();
+const route_image_pick: Router = express.Router();
 
 // #endregion
 
 // #region "API"
 
 /* api-GET*/
-route_image_pick.get("/", (req, res) => {
+route_image_pick.get("/", (req: express.Request, res: express.Response) => {
   try {
     const fileType = ".jpg";
 
-    const folderPath = path.join(__dirname, "../../../public/iImages/Full", "");
+    const folderPath: string = path.join(
+      __dirname,
+      "../../../public/iImages/Full",
+      ""
+    );
 
     // Get Images list in folder
     imgManager
@@ -47,7 +50,7 @@ route_image_pick.get("/", (req, res) => {
           res.end(imageLists);
         }
       });
-  } catch (error) {
+  } catch (error: string | Error | unknown | null) {
     dbgManager.iDebug_Message(error);
   }
 });

@@ -6,7 +6,7 @@ describe("__iUTest__ iUtility-iValidatorManager", () => {
       expect(validManager.Validator_isNumber(10)).toBeTrue(),
         expect(validManager.Validator_isNumber("10")).toBeTrue(),
         expect(validManager.Validator_isNumber("X")).toBeFalse();
-    } catch (error) {
+    } catch (error: string | Error | unknown | null) {
       dbgManager.iDebug_Message(error);
     }
   });

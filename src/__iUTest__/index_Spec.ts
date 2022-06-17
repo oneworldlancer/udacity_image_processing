@@ -3,7 +3,7 @@ import app from "../index";
 
 // #region "Params"
 
-const request = supertest(app);
+const request: supertest.SuperTest<supertest.Test> = supertest(app);
 
 // #endregion
 

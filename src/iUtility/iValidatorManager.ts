@@ -10,7 +10,7 @@ export class iValidatorManager {
   static Validator_isNumber(value: string | number): boolean {
     try {
       return value != null && value !== "" && !isNaN(Number(value.toString()));
-    } catch (error) {
+    } catch (error: string | Error | unknown | null) {
       dbgManager.iDebug_Message(error);
       return false;
     }

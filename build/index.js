@@ -49,11 +49,6 @@ app.get("/", function (req, res) {
     catch (error) {
         iDebugManager_1.iDebugManager.iDebug_Message(error);
     }
-    //console.log("__dirname == " + __dirname);
-    //res.send("Hello, world!"  + __dirname);
-    //res.send("<html> <head>server Response</head><body><h1> This page was render direcly from the server <p>Hello there welcome to my website</p></h1></body></html>");
-    ///// res.sendFile(__dirname + "/iWeb/index.html");
-    // res.sendFile(__dirname + "/public/iWeb/index.html");
 });
 /* Image APIs */
 app.get("/api", function (req, res) {
@@ -67,10 +62,6 @@ app.get("/api", function (req, res) {
     }
     // res.send("api- Hello, world!");
 });
-// serve your css as static
-/* app.get("/api", (req, res) => {
-    res.send("api- Hello, world!");
-}); */
 // #endregion
 // #region "iRoutes"
 try {
@@ -81,7 +72,5 @@ try {
 catch (error) {
     iDebugManager_1.iDebugManager.iDebug_Message(error);
 }
-// #endregion
-// #region ""
 // #endregion
 exports.default = app;

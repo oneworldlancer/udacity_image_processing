@@ -9,7 +9,7 @@ describe("__iUTest__ iManager-ImageManager", () => {
       expect(imgManager.Image_Get_ThumName("img1", "jpg", 200, 200)).toEqual(
         "img1_thum_200_200.jpg"
       );
-    } catch (error) {
+    } catch (error: string | Error | unknown | null) {
       dbgManager.iDebug_Message(error);
     }
   });

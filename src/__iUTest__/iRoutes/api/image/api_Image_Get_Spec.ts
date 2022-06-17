@@ -1,15 +1,19 @@
+//import supertest from "supertest";
 import { iDebugManager as dbgManager } from "../../../../iUtility/iDebugManager";
 import fs from "fs";
 import path from "path";
 import { iImageManager as imgManager } from "../../../../iManager/ImageManager/iImageManager";
+//import route_image_get from "../../../../iRoutes/api/image/api_Image_Get";
 
 // #region "Params"
+
+//const request: supertest.SuperTest<supertest.Test> = supertest(route_image_get);
 
 // #endregion
 
 // #region "__iUTest__ route_image_get"
 
-describe("__iUTest__ route_image_get-RESIZE", () => {
+describe("__iUTest__ Image", () => { 
   it("route_image_get-Resize if NOT-Exist (GET('/'))", async () => {
     try {
       const img_Name = "me",
@@ -90,8 +94,9 @@ describe("__iUTest__ route_image_get-RESIZE", () => {
         );
 
         expect(img_IsExist_NewResize).toBeTrue;
+        
       }, 1000);
-    } catch (error) {
+    } catch (error: string | Error | unknown | null) {
       dbgManager.iDebug_Message(error);
     }
   });

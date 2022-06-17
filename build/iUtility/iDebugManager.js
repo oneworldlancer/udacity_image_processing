@@ -9,9 +9,19 @@ var iDebugManager = /** @class */ (function () {
     iDebugManager.iDebug_Message = function (strMessage) {
         try {
             console.log("MSG:::  " + strMessage);
+            if (strMessage === null) {
+                return true;
+            }
+            else if (strMessage === "") {
+                return true;
+            }
+            else {
+                return false;
+            }
         }
         catch (error) {
             console.log(error);
+            return false;
         }
     };
     return iDebugManager;

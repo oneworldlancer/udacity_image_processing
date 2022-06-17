@@ -39,14 +39,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+//import supertest from "supertest";
 var iDebugManager_1 = require("../../../../iUtility/iDebugManager");
 var fs_1 = __importDefault(require("fs"));
 var path_1 = __importDefault(require("path"));
 var iImageManager_1 = require("../../../../iManager/ImageManager/iImageManager");
+//import route_image_get from "../../../../iRoutes/api/image/api_Image_Get";
 // #region "Params"
+//const request: supertest.SuperTest<supertest.Test> = supertest(route_image_get);
 // #endregion
 // #region "__iUTest__ route_image_get"
-describe("__iUTest__ route_image_get-RESIZE", function () {
+describe("__iUTest__ Image", function () {
     it("route_image_get-Resize if NOT-Exist (GET('/'))", function () { return __awaiter(void 0, void 0, void 0, function () {
         var img_Name, img_Ext, img_Width, img_Height, img_Name_Thum_1, img_IsExist, error_1;
         return __generator(this, function (_a) {

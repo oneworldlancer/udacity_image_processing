@@ -32,7 +32,7 @@ export class iImageManager {
       dbgManager.iDebug_Message("Image_Resize_Save_FileName == " + "END");
 
       return imgThumName;
-    } catch (error) {
+    } catch (error: string | Error | unknown | null) {
       dbgManager.iDebug_Message(error);
     }
   }
@@ -41,7 +41,7 @@ export class iImageManager {
   static Image_Get_FileName(imgName: string): string {
     try {
       return imgName.split(".").slice(0, -1).join(".").toString();
-    } catch (error) {
+    } catch (error: string | Error | unknown | null) {
       dbgManager.iDebug_Message(error);
       return "null";
     }
@@ -51,7 +51,7 @@ export class iImageManager {
   static Image_Get_FileExt(imgName: string): string {
     try {
       return imgName.substr(imgName.lastIndexOf(".") + 1);
-    } catch (error) {
+    } catch (error: string | Error | unknown | null) {
       dbgManager.iDebug_Message(error);
       return "null";
     }
@@ -77,7 +77,7 @@ export class iImageManager {
       await Fs.access(imgRootPath);
 
       return true;
-    } catch (error) {
+    } catch (error: string | Error | unknown | null) {
       dbgManager.iDebug_Message("Image_Check_IfExist  == " + error);
       return false;
     }
@@ -95,7 +95,7 @@ export class iImageManager {
       /*   dbgManager.iDebug_Message("names[0]== " + names[0]); */
 
       return names;
-    } catch (error) {
+    } catch (error: string | Error | unknown | null) {
       dbgManager.iDebug_Message(error);
     }
   }

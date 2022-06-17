@@ -93,7 +93,7 @@ route_image_get.get("/", function (req, res) { return __awaiter(void 0, void 0, 
                 }
                 img_Name_Thum_1 = iImageManager_1.iImageManager.Image_Get_ThumName(img_Name, "jpg", img_Width, img_Height);
                 iDebugManager_1.iDebugManager.iDebug_Message("img_Name_Thum == ".concat(img_Name_Thum_1));
-                return [4 /*yield*/, iImageManager_1.iImageManager.Image_Check_IfExist(path_1.default.join(__dirname, "../../public/iImages/Thum/", img_Name_Thum_1))];
+                return [4 /*yield*/, iImageManager_1.iImageManager.Image_Check_IfExist(path_1.default.join(__dirname, "../../../public/iImages/Thum/", img_Name_Thum_1))];
             case 1:
                 img_IsExist = _a.sent();
                 iDebugManager_1.iDebugManager.iDebug_Message("img_IsExist == ".concat(img_IsExist));
@@ -115,7 +115,7 @@ route_image_get.get("/", function (req, res) { return __awaiter(void 0, void 0, 
                     }
                 });
                 return [3 /*break*/, 4];
-            case 2: return [4 /*yield*/, iImageManager_1.iImageManager.Image_Resize_Save_FileName(img_Name, img_Ext, img_Name_Thum_1, img_Width, img_Height, path_1.default.join(__dirname, "../../public/iImages/Full/", "".concat(img_Name, ".").concat(img_Ext)), path_1.default.join(__dirname, "../../public/iImages/Thum/", img_Name_Thum_1))];
+            case 2: return [4 /*yield*/, iImageManager_1.iImageManager.Image_Resize_Save_FileName(img_Name, img_Ext, img_Name_Thum_1, img_Width, img_Height, path_1.default.join(__dirname, "../../../public/iImages/Full/", "".concat(img_Name, ".").concat(img_Ext)), path_1.default.join(__dirname, "../../../public/iImages/Thum/", img_Name_Thum_1))];
             case 3:
                 _a.sent();
                 setTimeout(function () {

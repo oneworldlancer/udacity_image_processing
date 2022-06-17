@@ -45,6 +45,7 @@ var multer_1 = __importDefault(require("multer"));
 var iDebugManager_1 = require("../../../iUtility/iDebugManager");
 // #region "Params"
 var route_image_new = express_1.default.Router();
+var img_NewFileName;
 // #endregion
 // #region "Middleware"
 route_image_new.use(express_1.default.static(__dirname + "../../../public/iWeb", {
@@ -58,7 +59,6 @@ route_image_new.use(express_1.default.static(__dirname + "../../../public/iWeb/c
 }));
 // #endregion
 // #region "Multer - API Endpoint for uploading file"
-var x;
 /* Multer Object */
 var multerStorage = multer_1.default.diskStorage({
     destination: function (req, file, cb) {
@@ -70,8 +70,8 @@ var multerStorage = multer_1.default.diskStorage({
             "   -  " +
             "FName==" +
             file.originalname);
-        x = path_1.default.parse(file.originalname).name + "_" + Date.now();
-        cb(null, x + ".jpg");
+        img_NewFileName = path_1.default.parse(file.originalname).name + "_" + Date.now();
+        cb(null, img_NewFileName + ".jpg");
     },
 });
 /* Multer Function with Filter */
@@ -92,34 +92,26 @@ var upload = (0, multer_1.default)({
 // #region "API"
 /* api-GET */
 route_image_new.get("/", function (req, res) {
-    //do something
-    //res.send("api- route_image_new!");
-    res
-        .status(200)
-        .sendFile(path_1.default.join(__dirname + "../../../../public/iWeb/img/upload.html"));
+    try {
+        res
+            .status(200)
+            .sendFile(path_1.default.join(__dirname + "../../../../public/iWeb/img/upload.html"));
+    }
+    catch (error) {
+        iDebugManager_1.iDebugManager.iDebug_Message(error);
+    }
 });
 /* api-POST */
 route_image_new.post("/", upload.single("fUpload"), function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         try {
             iDebugManager_1.iDebugManager.iDebug_Message(req.file);
-            /*     res.status(200).json({
-        status: "success",
-        message: "File created successfully!!",
-        });
-         */
-            /*   res.status(200).sendFile(
-              path.join(
-                  __dirname + "../../../../src/public/iWeb/img/list.html"
-              )
-          ); */
-            res.status(200).redirect("/api/img/get?filename=".concat(x, "&width=300&height=300"));
+            res
+                .status(200)
+                .redirect("/api/img/get?filename=".concat(img_NewFileName, "&width=300&height=300"));
         }
         catch (error) {
             iDebugManager_1.iDebugManager.iDebug_Message(error);
-            /*   res.json({
-        error,
-        }); */
             res.status(500).send(JSON.stringify({
                 status: error,
             }));

@@ -1,12 +1,13 @@
-import express from "express";
-
+import express, { Router } from "express";
 import path from "path";
 import multer from "multer";
 import { iDebugManager as dbgManager } from "../../../iUtility/iDebugManager";
 
 // #region "Params"
 
-const route_image_new = express.Router();
+const route_image_new: Router = express.Router();
+
+let img_NewFileName: string;
 
 // #endregion
 
@@ -33,15 +34,21 @@ route_image_new.use(
 
 // #region "Multer - API Endpoint for uploading file"
 
-let x: string;
-
 /* Multer Object */
 
 const multerStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
+  destination: (
+    req: express.Request,
+    file: Express.Multer.File,
+    cb: (error: Error | null, destination: string) => void
+  ) => {
     cb(null, path.join(__dirname, "../../../../src/public/iImages/Full"));
   },
-  filename: (req, file, cb) => {
+  filename: (
+    req: express.Request,
+    file: Express.Multer.File,
+    cb: (error: Error | null, destination: string) => void
+  ) => {
     dbgManager.iDebug_Message(
       "EXT== " +
         file.mimetype.split("/")[1] +
@@ -50,17 +57,21 @@ const multerStorage = multer.diskStorage({
         file.originalname
     );
 
-    x = path.parse(file.originalname).name + "_" + Date.now();
+    img_NewFileName = path.parse(file.originalname).name + "_" + Date.now();
 
-    cb(null, x + ".jpg");
+    cb(null, img_NewFileName + ".jpg");
   },
 });
 
 /* Multer Function with Filter */
-const upload = multer({
+const upload: multer.Multer = multer({
   storage: multerStorage,
-  fileFilter: function (req, file, callback) {
-    const ext = path.extname(file.originalname);
+  fileFilter: function (
+    req: express.Request,
+    file: Express.Multer.File,
+    callback: multer.FileFilterCallback
+  ) {
+    const ext: string = path.extname(file.originalname);
     if (ext !== ".png" && ext !== ".jpg" && ext !== ".gif" && ext !== ".jpeg") {
       return callback(new Error("Only images are allowed"));
     }
@@ -76,44 +87,42 @@ const upload = multer({
 // #region "API"
 
 /* api-GET */
-route_image_new.get("/", (req, res) => {
-  //do something
-  //res.send("api- route_image_new!");
-  res
-    .status(200)
-    .sendFile(path.join(__dirname + "../../../../public/iWeb/img/upload.html"));
+route_image_new.get("/", (req: express.Request, res: express.Response) => {
+  try {
+    res
+      .status(200)
+      .sendFile(
+        path.join(__dirname + "../../../../public/iWeb/img/upload.html")
+      );
+  } catch (error: string | Error | unknown | null) {
+    dbgManager.iDebug_Message(error);
+  }
 });
 
 /* api-POST */
-route_image_new.post("/", upload.single("fUpload"), async (req, res) => {
-  try {
-    dbgManager.iDebug_Message(req.file);
+route_image_new.post(
+  "/",
+  upload.single("fUpload"),
+  async (req: express.Request, res: express.Response) => {
+    try {
+      dbgManager.iDebug_Message(req.file);
 
-    /*     res.status(200).json({
-status: "success",
-message: "File created successfully!!",
-});
- */
-    /*   res.status(200).sendFile(
-      path.join(
-          __dirname + "../../../../src/public/iWeb/img/list.html"
-      )
-  ); */
+      res
+        .status(200)
+        .redirect(
+          `/api/img/get?filename=${img_NewFileName}&width=300&height=300`
+        );
+    } catch (error: string | Error | unknown | null) {
+      dbgManager.iDebug_Message(error);
 
-    res.status(200).redirect(`/api/img/get?filename=${x}&width=300&height=300`);
-  } catch (error) {
-    dbgManager.iDebug_Message(error);
-    /*   res.json({
-error,
-}); */
-
-    res.status(500).send(
-      JSON.stringify({
-        status: error,
-      })
-    );
+      res.status(500).send(
+        JSON.stringify({
+          status: error,
+        })
+      );
+    }
   }
-});
+);
 
 // #endregion
 
