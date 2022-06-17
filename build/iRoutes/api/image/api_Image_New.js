@@ -47,13 +47,15 @@ var iDebugManager_1 = require("../../../iUtility/iDebugManager");
 var route_image_new = express_1.default.Router();
 // #endregion
 // #region "Middleware"
-route_image_new.use(express_1.default.static(__dirname + "../../../public/iWeb", { etag: false }));
-route_image_new.use(express_1.default.static(__dirname + "../../../public/iWeb/img", { etag: false }));
-/*route_image_new.use(express.static("../../../public", {  etag: true}));
-route_image_new.use(express.static(__dirname + "../../../public/iWeb", {  etag: true}));  */
-route_image_new.use(express_1.default.static(__dirname + "../../../public/iWeb/css", { etag: false }));
-/*route_image_new.use(express.static(__dirname + "../../../../public/js", {  etag: true}));
-//route_image_new.use(express.static(__dirname + "../../../../public/iImages", { etag: true }));  */
+route_image_new.use(express_1.default.static(__dirname + "../../../public/iWeb", {
+    etag: false,
+}));
+route_image_new.use(express_1.default.static(__dirname + "../../../public/iWeb/img", {
+    etag: false,
+}));
+route_image_new.use(express_1.default.static(__dirname + "../../../public/iWeb/css", {
+    etag: false,
+}));
 // #endregion
 // #region "Multer - API Endpoint for uploading file"
 var x;
@@ -63,7 +65,6 @@ var multerStorage = multer_1.default.diskStorage({
         cb(null, path_1.default.join(__dirname, "../../../../src/public/iImages/Full"));
     },
     filename: function (req, file, cb) {
-        var ext = file.mimetype.split("/")[1];
         iDebugManager_1.iDebugManager.iDebug_Message("EXT== " +
             file.mimetype.split("/")[1] +
             "   -  " +
@@ -78,10 +79,7 @@ var upload = (0, multer_1.default)({
     storage: multerStorage,
     fileFilter: function (req, file, callback) {
         var ext = path_1.default.extname(file.originalname);
-        if (ext !== ".png" &&
-            ext !== ".jpg" &&
-            ext !== ".gif" &&
-            ext !== ".jpeg") {
+        if (ext !== ".png" && ext !== ".jpg" && ext !== ".gif" && ext !== ".jpeg") {
             return callback(new Error("Only images are allowed"));
         }
         callback(null, true);
@@ -96,7 +94,9 @@ var upload = (0, multer_1.default)({
 route_image_new.get("/", function (req, res) {
     //do something
     //res.send("api- route_image_new!");
-    res.status(200).sendFile(path_1.default.join(__dirname + "../../../../public/iWeb/img/upload.html"));
+    res
+        .status(200)
+        .sendFile(path_1.default.join(__dirname + "../../../../public/iWeb/img/upload.html"));
 });
 /* api-POST */
 route_image_new.post("/", upload.single("fUpload"), function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
@@ -104,23 +104,25 @@ route_image_new.post("/", upload.single("fUpload"), function (req, res) { return
         try {
             iDebugManager_1.iDebugManager.iDebug_Message(req.file);
             /*     res.status(200).json({
-    status: "success",
-    message: "File created successfully!!",
-    });
-     */
+        status: "success",
+        message: "File created successfully!!",
+        });
+         */
             /*   res.status(200).sendFile(
-          path.join(
-              __dirname + "../../../../src/public/iWeb/img/list.html"
-          )
-      ); */
+              path.join(
+                  __dirname + "../../../../src/public/iWeb/img/list.html"
+              )
+          ); */
             res.status(200).redirect("/api/img/get?filename=".concat(x, "&width=300&height=300"));
         }
         catch (error) {
             iDebugManager_1.iDebugManager.iDebug_Message(error);
             /*   res.json({
-    error,
-    }); */
-            res.status(500).send(JSON.stringify({ status: error }));
+        error,
+        }); */
+            res.status(500).send(JSON.stringify({
+                status: error,
+            }));
         }
         return [2 /*return*/];
     });

@@ -17,21 +17,25 @@ var port = 3000;
 app.listen(port, function () {
     console.log("server started at localhost: port ", port);
 });
-// serve your css as static
-app.use(express_1.default.static("/public", { etag: true }));
-app.use(express_1.default.static(__dirname + "/public/iWeb", { etag: true }));
-app.use(express_1.default.static(__dirname + "/public/css", { etag: true }));
-app.use(express_1.default.static(__dirname + "/public/js", { etag: true }));
-app.use(express_1.default.static(__dirname + "/public/img", { etag: true }));
-app.use(express_1.default.static(__dirname + "/public/iImages", { etag: true }));
-//app.use(express.static(__dirname + "/public/iImages"));
-/*app.use(express.static(__dirname + "/iImages")); */
-//app.use(express.static("public")); 
-//app.use(express.static("public/iWeb")); 
-//app.use("/images", express.static("public/iImages"));
-app.use("/images", express_1.default.static("images", { etag: true }));
-//app.use("/images", express.static("images"));
-//app.use(express.static("public"))
+/* Static Files */
+app.use(express_1.default.static("/public", {
+    etag: true,
+}));
+app.use(express_1.default.static(__dirname + "/public/iWeb", {
+    etag: true,
+}));
+app.use(express_1.default.static(__dirname + "/public/css", {
+    etag: true,
+}));
+app.use(express_1.default.static(__dirname + "/public/js", {
+    etag: true,
+}));
+app.use(express_1.default.static(__dirname + "/public/img", {
+    etag: true,
+}));
+app.use(express_1.default.static(__dirname + "/public/iImages", {
+    etag: true,
+}));
 // #endregion
 // #region "iApis"
 //* HOME Page */

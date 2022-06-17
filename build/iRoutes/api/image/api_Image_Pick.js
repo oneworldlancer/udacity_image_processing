@@ -15,48 +15,32 @@ var route_image_pick = express_1.default.Router();
 route_image_pick.get("/", function (req, res) {
     try {
         var fileType_1 = ".jpg";
-        var imgNameList = void 0, i_1;
         var folderPath = path_1.default.join(__dirname, "../../../public/iImages/Full", "");
-        //////////////////////////////////////
-        // imgNameList =
+        // Get Images list in folder
         iImageManager_1.iImageManager
             .Image_Get_List_ImageName_ByFolderID(folderPath)
             .then(function (values) {
             if (Array.isArray(values)) {
-                var imageLists = "<ul>";
-                for (i_1 = 0; i_1 < values.length; i_1++) {
-                    if (path_1.default.extname(values[i_1]) === fileType_1) {
-                        /*       imageLists +=
-                       '<li><a href="/?image=' +
-                       values[i] +
-                       '">' +
-                       values[i] +
-                       "</li>";  */
+                var imageLists = "<ol >";
+                for (var i = 0; i < values.length; i++) {
+                    if (path_1.default.extname(values[i]) === fileType_1) {
+                        var imgSRC = "/Full/" + values[i];
                         imageLists +=
-                            '<li><a href="/api/img/get?filename=' +
-                                iImageManager_1.iImageManager.Image_Get_FileName(values[i_1]) +
-                                '&width=300&height=300">' +
-                                values[i_1] +
+                            '<li style="float:ledt;display: inline;float: left; width:120px;marging:auto;"><br/><img src="' +
+                                imgSRC +
+                                '"  style="width:100px;height:100px;" /><br/><a href="/api/img/get?filename=' +
+                                iImageManager_1.iImageManager.Image_Get_FileName(values[i]) +
+                                '&width=300&height=300"/>' +
+                                values[i] +
                                 "</li>";
                     }
                 }
-                imageLists += "</ul>";
-                res.writeHead(200, { "Content-type": "text/html" });
+                imageLists += "</ol>";
+                res.writeHead(200, {
+                    "Content-type": "text/html",
+                });
                 res.end(imageLists);
-                /*   for (i = 0; i < values.length; i++) {
-               if (path.extname(values[i]) === fileType) {
-                   // imgNameList.push(values[i]); //store the file name into the array files
-                   dbgManager.iDebug_Message(values[i]);
-               }
-           }
-           dbgManager.iDebug_Message(
-               "apo-list-img-values-promises == " + values[0]
-           ); */
             }
-            /*  dbgManager.iDebug_Message(
-                "imgNameList-promise == " + values.length
-            ); */
-            //console.log(values);
         });
     }
     catch (error) {

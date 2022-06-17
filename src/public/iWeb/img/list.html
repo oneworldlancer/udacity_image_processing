@@ -1,15 +1,13 @@
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/app.css" />
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/app.css">
+    <title>html form</title>
 
-  <title>html form</title>
-
-  <script>
-
-    /* $('#btnSubmit').click(function()
+    <script>
+      /* $('#btnSubmit').click(function()
     {
         $.ajax({
             url: '/',
@@ -24,31 +22,42 @@
             }               
         });
     } */
+    </script>
+  </head>
 
-  </script>
-</head>
+  <body>
+    <div class="div_Center">
+      <h1 style="margin: 20px">Image Processing Project</h1>
 
-<body>
+      <br />
+      <div class="div_Command">
+        <input
+          type="button"
+          id="btn_New"
+          name="btn_New"
+          value="Upload New"
+          class="btn_Command"
+          onclick="window.location = '/api/img/new'"
+        />
+        <input
+          type="button"
+          id="btn_Pick"
+          name="btn_Pick"
+          value="Pick Image"
+          class="btn_Command"
+          onclick="window.location = '/api/img/pick'"
+        />
+        <input
+          type="button"
+          id="btn_Get"
+          name="btn_Get"
+          value="View Image"
+          class="btn_Command"
+          onclick="window.location = '/api/img/get?filename=me&width=300&height=300'"
+        />
+      </div>
 
-  <div class="div_Center">
-
-    <h1 style="margin:20px ;">Image Processing Project</h1>
-
-    <br />
-    <div class="div_Command">
-      <input type="button" id="btn_New" name="btn_New" value="Upload New" class="btn_Command"
-        onclick="window.location = '/api/img/new'" />
-      <input type="button" id="btn_Pick" name="btn_Pick" value="Pick Image" class="btn_Command"
-        onclick="window.location = '/api/img/pick'" />
-      <input type="button" id="btn_Get" name="btn_Get" value="View Image" class="btn_Command"
-        onclick="window.location = '/api/img/get?filename=me&width=300&height=300'" />
+      <br />
     </div>
-
-    <br />
-
-  </div>
-
-
-</body>
-
+  </body>
 </html>

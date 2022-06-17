@@ -4,15 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prettier-f": "prettier --write src/**/*.{ts,js,css,html}",
+    "prettier-f": "prettier --write src/**/*.{ts,js,json,css,html}",
     "lint": "eslint src/**/*.ts",
     "lint-fix": "eslint src/**/*.ts --fix",
     "jasmine": "jasmine",
-    "nodemon": "nodemon --watch",
+    "nodemon": "nodemon ./src/index.ts --watch",
     "app-build": "npx tsc",
-    "app-start": "npm run app-build && node build/index.js",
-    "app-test": "nodemon --watch './**/*.ts' && npm run app-build && npm run jasmine",
-    "server-start": "nodemon src/index.ts"
+    "app-start": "nodemon ./src/index.ts && npm run app-build",
+    "app-test": "npm run app-build && npm run jasmine"
   },
   "keywords": [],
   "author": "",
@@ -30,6 +29,8 @@
     "@types/sharp": "^0.30.4",
     "@types/supertest": "^2.0.12",
     "@types/typescript": "^2.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.28.0",
+    "@typescript-eslint/parser": "^5.28.0",
     "eslint": "^8.17.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",

@@ -40,7 +40,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.iImageManager = void 0;
-var path_1 = __importDefault(require("path"));
 var sharp_1 = __importDefault(require("sharp"));
 var iDebugManager_1 = require("../../iUtility/iDebugManager");
 var iImageManager = /** @class */ (function () {
@@ -48,23 +47,21 @@ var iImageManager = /** @class */ (function () {
         this.folder = folder;
     }
     /* Image_Resize_Save_FileName */
-    iImageManager.Image_Resize_Save_FileName = function (imgName, imgExt, imgThumName, imgWidth, imgHeight, buffer) {
+    iImageManager.Image_Resize_Save_FileName = function (imgName, imgExt, imgThumName, imgWidth, imgHeight, imgFromPath, imgToPath) {
         return __awaiter(this, void 0, void 0, function () {
-            var filepath, outpath, error_1;
+            var error_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        filepath = path_1.default.join(__dirname, "../../public/iImages/Full/", "".concat(imgName, ".").concat(imgExt));
-                        outpath = path_1.default.join(__dirname, "../../public/iImages/Thum/", imgThumName);
                         sharp_1.default.cache(false);
                         iDebugManager_1.iDebugManager.iDebug_Message("Image_Resize_Save_FileName == " + "START");
-                        return [4 /*yield*/, (0, sharp_1.default)(filepath)
+                        return [4 /*yield*/, (0, sharp_1.default)(imgFromPath)
                                 .resize(imgWidth, imgHeight, {
                                 fit: sharp_1.default.fit.fill,
                                 withoutEnlargement: true,
                             })
-                                .toFile(outpath)];
+                                .toFile(imgToPath)];
                     case 1:
                         _a.sent();
                         iDebugManager_1.iDebugManager.iDebug_Message("Image_Resize_Save_FileName == " + "END");
@@ -103,22 +100,16 @@ var iImageManager = /** @class */ (function () {
         //return path.resolve(`${imgName}/${filename}`);
         return "".concat(imgName, "_thum_").concat(imgWidth, "_").concat(imgHeight, ".").concat(imgExt);
     };
-    /* Image_Get_FilePath */
-    iImageManager.Image_Get_FilePath = function (filename) {
-        //return path.resolve(`${this.folder}/${filename}`)
-        return "";
-    };
     /* Image_Check_IfExist */
-    iImageManager.Image_Check_IfExist = function (imgThumName) {
+    iImageManager.Image_Check_IfExist = function (imgRootPath) {
         return __awaiter(this, void 0, void 0, function () {
-            var filepath, Fs, error_2;
+            var Fs, error_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        filepath = path_1.default.join(__dirname, "../../public/iImages/Thum/", imgThumName);
                         Fs = require("fs").promises;
-                        return [4 /*yield*/, Fs.access(filepath)];
+                        return [4 /*yield*/, Fs.access(imgRootPath)];
                     case 1:
                         _a.sent();
                         return [2 /*return*/, true];
@@ -134,25 +125,22 @@ var iImageManager = /** @class */ (function () {
     /* Image_Get_List_ImageName_ByFolderID - get the list of jpg files in the image dir */
     iImageManager.Image_Get_List_ImageName_ByFolderID = function (imageDir) {
         return __awaiter(this, void 0, void 0, function () {
-            var fileType, files, i, fsp, names, error_3;
+            var fsp, names, error_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        fileType = ".jpg", files = [];
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
+                        _a.trys.push([0, 2, , 3]);
                         fsp = require("fs-promise");
                         return [4 /*yield*/, fsp.readdir(imageDir)];
-                    case 2:
+                    case 1:
                         names = _a.sent();
                         /*   dbgManager.iDebug_Message("names[0]== " + names[0]); */
                         return [2 /*return*/, names];
-                    case 3:
+                    case 2:
                         error_3 = _a.sent();
                         iDebugManager_1.iDebugManager.iDebug_Message(error_3);
-                        return [3 /*break*/, 4];
-                    case 4: return [2 /*return*/];
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
                 }
             });
         });

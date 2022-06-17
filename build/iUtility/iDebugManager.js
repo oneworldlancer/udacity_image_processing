@@ -2,7 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.iDebugManager = void 0;
 var iDebugManager = /** @class */ (function () {
-    function iDebugManager(err) {
+    function iDebugManager(folder) {
+        this.strMessage = folder;
     }
     /* iDebug_Message */
     iDebugManager.iDebug_Message = function (strMessage) {

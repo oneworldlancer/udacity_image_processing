@@ -48,9 +48,8 @@ var iValidatorManager_1 = require("../../../iUtility/iValidatorManager");
 var iImageManager_1 = require("../../../iManager/ImageManager/iImageManager");
 // #region "Params"
 var route_image_get = express_1.default.Router();
-var img_Path_SizeFull = "../../../public/iImages/Full/";
-var img_Path_SizeThum = "../../../public/iImages/Thum/";
-var img_Name = "img1", img_Ext = "jpg", img_Width = 200, img_Height = 200, img_Size = 0;
+var img_Name = "img1", img_Width = 200, img_Height = 200;
+var img_Ext = "jpg";
 // #endregion
 // #region "API"
 /* api-GET*/
@@ -92,40 +91,47 @@ route_image_get.get("/", function (req, res) { return __awaiter(void 0, void 0, 
                 else {
                     img_Height = 200;
                 }
-                img_IsExist = void 0;
                 img_Name_Thum_1 = iImageManager_1.iImageManager.Image_Get_ThumName(img_Name, "jpg", img_Width, img_Height);
                 iDebugManager_1.iDebugManager.iDebug_Message("img_Name_Thum == ".concat(img_Name_Thum_1));
-                return [4 /*yield*/, iImageManager_1.iImageManager.Image_Check_IfExist(img_Name_Thum_1)];
+                return [4 /*yield*/, iImageManager_1.iImageManager.Image_Check_IfExist(path_1.default.join(__dirname, "../../public/iImages/Thum/", img_Name_Thum_1))];
             case 1:
                 img_IsExist = _a.sent();
                 iDebugManager_1.iDebugManager.iDebug_Message("img_IsExist == ".concat(img_IsExist));
                 if (!img_IsExist) return [3 /*break*/, 2];
                 fs_1.default.readFile(path_1.default.join(__dirname, "../../../public/iImages/Thum/", img_Name_Thum_1), function (err, content) {
                     if (err) {
-                        res.writeHead(400, { "Content-type": "text/html" });
+                        res.writeHead(400, {
+                            "Content-type": "text/html",
+                        });
                         console.log(err);
                         res.end("No such image");
                     }
                     else {
                         //setup response as IMAGE
-                        res.writeHead(200, { "Content-type": "image/jpg" });
+                        res.writeHead(200, {
+                            "Content-type": "image/jpg",
+                        });
                         res.end(content);
                     }
                 });
                 return [3 /*break*/, 4];
-            case 2: return [4 /*yield*/, iImageManager_1.iImageManager.Image_Resize_Save_FileName(img_Name, img_Ext, img_Name_Thum_1, img_Width, img_Height, null)];
+            case 2: return [4 /*yield*/, iImageManager_1.iImageManager.Image_Resize_Save_FileName(img_Name, img_Ext, img_Name_Thum_1, img_Width, img_Height, path_1.default.join(__dirname, "../../public/iImages/Full/", "".concat(img_Name, ".").concat(img_Ext)), path_1.default.join(__dirname, "../../public/iImages/Thum/", img_Name_Thum_1))];
             case 3:
                 _a.sent();
                 setTimeout(function () {
                     fs_1.default.readFile(path_1.default.join(__dirname, "../../../public/iImages/Thum/", img_Name_Thum_1), function (err, content) {
                         if (err) {
-                            res.writeHead(400, { "Content-type": "text/html" });
+                            res.writeHead(400, {
+                                "Content-type": "text/html",
+                            });
                             console.log(err);
                             res.end("No such image");
                         }
                         else {
                             //setup response as IMAGE
-                            res.writeHead(200, { "Content-type": "image/jpg" });
+                            res.writeHead(200, {
+                                "Content-type": "image/jpg",
+                            });
                             res.end(content);
                         }
                     });

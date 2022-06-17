@@ -1,37 +1,36 @@
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/app.css" />
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/app.css">
+    <title>Image Processing Project</title>
+  </head>
 
-  <title>Image Processing Project</title>
+  <body>
+    <div class="div_Center">
+      <h1 style="margin: 20px">Image Processing Project</h1>
 
-
-</head>
-
-<body>
-
-  <div class="div_Center">
-
-    <h1 style="margin:20px ;">Image Processing Project</h1>
-
-    <br />
-    <div class="div_Command">
-
-
-      <div>
-        <form action="/api/img/new" enctype="multipart/form-data" method="post">
-          <input type="file" class="admin__input" id="fUpload" name="fUpload" />
-          <input type="submit" id="btnSubmit" name="btnSubmit" />
-        </form>
+      <br />
+      <div class="div_Command">
+        <div>
+          <form
+            action="/api/img/new"
+            enctype="multipart/form-data"
+            method="post"
+          >
+            <input
+              type="file"
+              class="admin__input"
+              id="fUpload"
+              name="fUpload"
+            />
+            <input type="submit" id="btnSubmit" name="btnSubmit" />
+          </form>
+        </div>
       </div>
+
+      <br />
     </div>
-
-    <br />
-
-  </div>
-
-</body>
-
+  </body>
 </html>
